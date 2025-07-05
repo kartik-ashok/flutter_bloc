@@ -4,7 +4,10 @@ import 'package:bloclearn/common/widgets/buttons/basic_app_button.dart';
 import 'package:bloclearn/core/config/assets/app_images.dart';
 import 'package:bloclearn/core/config/assets/app_vectors.dart';
 import 'package:bloclearn/core/config/theme/app_colors.dart';
+import 'package:bloclearn/main.dart';
+import 'package:bloclearn/presentation/choose_mode/bloc/theme_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ChooseMode extends StatelessWidget {
@@ -62,19 +65,29 @@ class ChooseMode extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        ClipOval(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color(0xff30393C).withOpacity(0.5),
-                                  shape: BoxShape.circle),
-                              child: SvgPicture.asset(
-                                AppVectors.sun,
-                                fit: BoxFit.none,
+                        GestureDetector(
+                          onTap: () {
+                            context
+                                .read<ThemeCubit>()
+                                .updateTheme(ThemeMode.light);
+                            // read<ThemeCubit>(). ();
+                            // Handle light mode selection
+                            debugPrint('Light Mode Selected');
+                          },
+                          child: ClipOval(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xff30393C)
+                                        .withOpacity(0.5),
+                                    shape: BoxShape.circle),
+                                child: SvgPicture.asset(
+                                  AppVectors.sun,
+                                  fit: BoxFit.none,
+                                ),
                               ),
                             ),
                           ),
@@ -90,19 +103,29 @@ class ChooseMode extends StatelessWidget {
                     const SizedBox(width: 40),
                     Column(
                       children: [
-                        ClipOval(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                  color:
-                                      const Color(0xff30393C).withOpacity(0.5),
-                                  shape: BoxShape.circle),
-                              child: SvgPicture.asset(
-                                AppVectors.moon,
-                                fit: BoxFit.none,
+                        GestureDetector(
+                          onTap: () {
+                            context
+                                .read<ThemeCubit>()
+                                .updateTheme(ThemeMode.dark);
+                            // Handle dark mode selection
+                            debugPrint(
+                                'Dark mode selected'); // Debug print for dark mode
+                          },
+                          child: ClipOval(
+                            child: BackdropFilter(
+                              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                              child: Container(
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xff30393C)
+                                        .withOpacity(0.5),
+                                    shape: BoxShape.circle),
+                                child: SvgPicture.asset(
+                                  AppVectors.moon,
+                                  fit: BoxFit.none,
+                                ),
                               ),
                             ),
                           ),
